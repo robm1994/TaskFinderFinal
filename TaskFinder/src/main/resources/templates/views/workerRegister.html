@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<title> Worker register Form</title>
+</head>
+<body>
+
+	<div layout:fragment="content" class="container mySpace">
+	<div class="alert alert-info" th:if="${exist}">
+	<p class="text text-center">
+	  Worker with this Email already Exist
+	</p>
+	</div>
+		<form th:action="@{/registerWorker}" th:object="${user}" method="post">
+
+			<div class="form-group">
+				<label for="email" class="form-control-label">Email</label> <input
+					type="text" class="form-control" th:field="*{email}" id="email" style="width: 500px;" />
+				<div class="text text-danger" th:if="${#fields.hasErrors('email')}"
+					th:errors="*{email}"></div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="form-control-label">Password</label> <input
+					type="password" class="form-control" th:field="*{password}"
+					id="password" style="width: 500px;"/>
+				<div class="text text-danger"
+					th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+					
+					
+			<div class="form-group">
+				<label for="name" class="form-control-label">Name</label> <input
+					type="text" class="form-control" th:field="*{name}" id="name" style="width: 500px;" />
+				<div class="text text-danger" th:if="${#fields.hasErrors('name')}"
+					th:errors="*{name}"></div>
+
+			</div>
+			
+			 <div class="form-group">
+                        <label class="col-form-label" for="skill">Skilled in</label>
+                        <select class="form-control" id="skill" name="skill" style="width: 500px;">
+                            <option value="default">Select a category</option>
+                            <option value="Electrical">Electrician</option>
+                            <option value="Carpentry">Carpenter</option>
+                            <option value="Plumbing">Plumber</option>
+                            <option value="Plastering">Plasterer</option>
+                            <option value="Painting">Painter</option>
+                            </select>
+                 </div>
+               
+			<!--  
+			<div class="form-group">
+				<label for="skill" class="form-control-label">Skill</label> <input
+					type="text" class="form-control" th:field="*{skill}" id="skill" style="width: 500px;"/>
+				<div class="text text-danger" th:if="${#fields.hasErrors('skill')}"
+					th:errors="*{skill}"></div>
+			</div> -->
+			
+			
+			<div class="form-group">
+				<label for="number" class="form-control-label">Phone Number</label> <input
+					type="text" class="form-control" th:field="*{number}" id="number" style="width: 500px;" />
+				<div class="text text-danger" th:if="${#fields.hasErrors('number')}"
+					th:errors="*{number}"></div>
+			</div>
+			
+
+			
+			</div>
+			
+			
+			
+			<input type="submit" value="Submit" class="btn btn-primary" />
+
+		</form>
+	</div>
+</body>  
+</html>

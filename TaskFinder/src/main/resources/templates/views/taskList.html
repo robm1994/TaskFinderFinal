@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css"
+rel="stylesheet" type="text/css">
+<!--  <link rel="stylesheet"
+href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+<link rel="stylesheet"
+href="https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link
+href="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Sortable-Bootstrap-Tables-Bootstrap-Sortable/Contents/bootstrap-sortable.css"
+rel="stylesheet" type="text/css">
+
+
+<title>Tasks Page</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+	integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/mdb.min.js"></script>
+
+
+</head>
+<body>
+
+
+
+	<div layout:fragment="content" class="container mySpace">
+
+		<!-- Modal
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Offer</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<form th:action="@{/makeOffer}" th:object="${offer}" method="post">
+
+
+							<div class="form-group">
+								<label for="Amount" class="form-control-label">Amount</label> <input
+									type="text" class="form-control" th:field="*{amount}"
+									id="amount" />
+								<div class="text text-danger"
+									th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+							</div>
+
+							<input type="submit" value="Submit" class="btn btn-primary" />
+						</form>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		 -->
+
+		<!--       <form action="/tasks" class="form-inline">
+	        <div class="form-group mb-2">
+	         <input type="text" class="form-control" name="category" placeholder="Search By Description" />
+	      
+	         
+	         <input type="submit" value="Search"  class="btn btn-primary" />
+	        </div>
+	     </form> -->
+
+
+		<style>
+.searchbar {
+	margin-bottom: auto;
+	margin-top: auto;
+	height: 60px;
+	background-color: #353b48;
+	border-radius: 30px;
+	padding: 10px;
+}
+
+.search_input {
+	color: white;
+	border: 0;
+	outline: 0;
+	background: none;
+	width: 0;
+	caret-color: transparent;
+	line-height: 40px;
+	transition: width 0.4s linear;
+}
+
+.searchbar:hover>.search_input {
+	padding: 0 10px;
+	width: 450px;
+	caret-color: blue;
+	transition: width 0.4s linear;
+}
+
+.searchbar:hover>.search_icon {
+	background: white;
+	color: #2a52be;
+}
+
+.search_icon {
+	height: 40px;
+	width: 40px;
+	float: right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	color: white;
+}
+</style>
+		<form action="/tasks" class="form-inline">
+			<div class="container h-100">
+				<div class="d-flex justify-content-center h-100">
+					<div class="searchbar">
+						<input class="search_input" type="text" name="name"
+							placeholder="Search Keyword"> <a href="#"
+							class="search_icon"><i class="fas fa-search"></i></a>
+						<!--    <input type="submit" value="search_icon"  class="btn btn-primary" /> -->
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<br> </br>
+
+		<div class="card">
+			<div class="card ">
+				<table class="table table-hover sortable">
+					<thead>
+						<tr>
+						
+							<th>Date Posted <i class="fas fa-sort"></i></th>
+							<th>Location <i class="fas fa-sort"></i></th>
+							<th>Category <i class="fas fa-sort"></i></th>
+							<th>Description <i class="fas fa-sort"></i></th>
+							<th>Posted By</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="task:${tasks}">
+
+							<!--  <td th:text="${task.id}"></td>-->
+							<td th:text="${task.date}"></td>
+							<td th:text="${task.location}"></td>
+							<td th:text="${task.category}"></td>
+							<td th:text="${task.description}"></td>
+							<td th:text="${task.user.email}"></td>
+<!--  class="btn btn-dark" data-toggle="modal"
+								data-target="#exampleModalCenter"-->
+
+							<td><a  th:href="@{/makeOffer(id=${task.id})}" class="btn btn-dark" >Make An Offer <i class="fas fa-comment-dollar"></i></a></td>
+						</tr>
+					</tbody>
+
+	
+				</table>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+				<script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Sortable-Bootstrap-Tables-Bootstrap-Sortable/Scripts/bootstrap-sortable.js"></script>
+				
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+</body>
+</html>

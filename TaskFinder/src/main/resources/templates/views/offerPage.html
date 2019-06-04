@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+	
+<head>
+</head>
+<body>
+	
+
+	
+ <div layout:fragment="content" class="container mySpace">
+		
+  <div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 20rem; margin-top: 6rem;">
+  <div class="card-header">Offer</div>
+  <div class="card-body"> 
+  
+
+      
+      <form th:action="@{/makeOffer}" th:object="${offer}" method="post">
+      
+			<div class="form-group">
+				<label for="Amount" class="form-control-label">Amount</label>
+				<input type="text" class="form-control" th:field="*{amount}"
+					id="amount" />
+				<div class="text text-danger"
+					th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+
+			</div>
+			<input type="submit" value="Submit" class="btn btn-primary" />
+			</form>
+    
+      
+    </div>
+  </div>
+</div>
+  
+  <form th:action="@{/makeOffer}" th:object="${offer}" method="post">
+
+			
+			<div class="form-group">
+				<label for="Amount" class="form-control-label">Amount</label>
+				<input type="text" class="form-control" th:field="*{amount}"
+					id="amount" />
+				<div class="text text-danger"
+					th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+
+			</div>
+			<input type="submit" value="Submit" class="btn btn-primary" />
+			</form>
+    
+  </div>
+	</div>
+		
+	
+	</div> 
+	</body>
+</html>

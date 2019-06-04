@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragments/main_layout}" >
+<title>Leave a Rating</title>
+<head>
+</head>
+<body>
+
+
+	<div layout:fragment="content" class="container mySpace">
+		
+		<div class="card">
+			<div class="card card-body">
+				<h2>
+					Please leave your rating below, <span th:utext="${name}">
+				</h2>
+			</div>
+			</div>
+			</br>
+		
+		<div class="card">
+			<div class="card card-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Location</th>
+							<th>Category</th>
+							<th>Description</th>
+					
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="task:${tasks}">
+							<td th:text="${task.date}"></td>
+							<td th:text="${task.location}"></td>
+							<td th:text="${task.category}"></td>
+							<td th:text="${task.description}"></td>
+							<!--  <td th:text="$task.offer.user.email}"></td> -->
+							
+							
+							<td><a  th:href="@{/leaveRating(id=${task.id})}" class="btn btn-dark" >Rate work <i class="far fa-star"></i></a> </td>
+							
+						</tr>
+						
+						
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	
+	
+	<br>
+	
+	<div class="card">
+			<div class="card card-body">
+				<h2>
+					Ratings you have left, <span th:utext="${name}">
+				</h2>
+			</div>
+			</div>
+			
+	
+	<div class="card">
+			<div class="card card-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>What you said </th>
+							<th>Star Rating</th>
+							<th>Worker</th>
+							
+							
+						</tr>
+					</thead>
+					</div>
+					</div>
+					</br>
+					<tbody>
+						<tr th:each="rating:${ratings}">
+							<td th:text="${rating.comment}"></td>
+							<div th:switch="${rating.stars}">
+							<td th:case="5"><span class="fa fa-star checked">
+															<span class="fa fa-star checked"> <span
+																class="fa fa-star checked"> <span
+																	class="fa fa-star checked"> <span
+																		class="fa fa-star checked"></span></td>
+													<td th:case="4"><span class="fa fa-star checked">
+															<span class="fa fa-star checked"> <span
+																class="fa fa-star checked"> <span
+																	class="fa fa-star checked"></span></td>
+													<td th:case="3"><span class="fa fa-star checked"><span
+															class="fa fa-star checked"> <span
+																class="fa fa-star checked"></span></td>
+													<td th:case="2"><span class="fa fa-star checked"><span
+															class="fa fa-star checked"> </span></td>
+													<td th:case="1"><span class="fa fa-star checked"></span>
+													</td>
+						
+						<td th:text="${rating.worker.email}"></td>	
+							
+							
+						</tr>
+						
+						
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+</div>
+</body>
+</html>

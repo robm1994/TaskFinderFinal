@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+  <meta charset="utf-8"/>
+   <!-- DayPilot library -->
+  <script src="js/daypilot/daypilot-all.min.js"></script>
+  <title>workercalender</title>
+
+ <style>
+    .main { padding: 10px }
+  </style>
+
+<script src="js/daypilot-all.min.js"></script> 
+
+</head>
+<body>
+<div layout:fragment="content" class="container mySpace">
+<div class="space">
+<h3 style="text-ailgn:center; color:white">Week:
+<a href="javascript:dp.startDate = dp.startDate.addDays(-7); dp.update();">Previous</a>
+    |
+<a href="javascript:dp.startDate = dp.startDate.addDays(7); dp.update();">Next</a></h3>
+<div class="main">
+  <div id="dp"></div>
+</div>
+
+
+
+</div>
+<script>
+
+  var dp = new DayPilot.Calendar("dp", {
+    locale: "en-gb",
+    viewType: "Week",
+    showAllDayEvents: true,
+    timeRangeSelectedHandling: "Disabled",
+    eventDeleteHandling: "Disabled",
+    eventMoveHandling: "Disabled",
+    eventResizeHandling: "Update",
+    onEventResized: function (args) {
+      this.message("Event resized: " + args.e.text());
+    },
+    eventClickHandling: "Disabled",
+    eventHoverHandling: "Disabled",
+  });
+  
+ 
+  var aList = "[[${tasks}]]"
+ var userTasks = [];
+ 	var tasks = new Array();
+  tasks = aList.split(',')
+ console.log(aList)
+  
+
+
+   
+for (i = 0; i < tasks.length; i++) {
+var theTasks = new Array();
+theTasks = tasks[i].split('|');
+console.log(theTasks)
+
+//new Date(2011, 0, 1, 0, 0, 0, 0);
+
+
+console.log(+theTasks[1].slice(0,4));//year
+console.log(+theTasks[1].slice(6,7)-1);//month
+console.log(+theTasks[1].slice(8,10));//day
+console.log(+theTasks[2].slice(0,2)+1);//hour
+console.log(+theTasks[2].slice(3,5));//minutes
+
+
+
+
+let startDate = new Date(
++theTasks[1].slice(0,4),//year
++theTasks[1].slice(6,7)-1,//month
++theTasks[1].slice(8,10),//day
++theTasks[2].slice(0,2)+1,//hour
++theTasks[2].slice(3,5),//minutes
+0,0);
+
+
+
+
+let endDate = new Date(
++theTasks[1].slice(0,4),//year
++theTasks[1].slice(6,7)-1,//month
++theTasks[1].slice(8,10),//day
++theTasks[2].slice(0,2)+5,//hour
++theTasks[2].slice(3,5),//minutes
+0,0);
+
+console.log("startDate: " + startDate)
+console.log("endDate: " + endDate)
+
+var e = new DayPilot.Event({
+ start: startDate,
+ end: endDate,
+ id: DayPilot.guid(),
+ text: theTasks[0]
+ //text: theTasks[3]
+
+});
+dp.events.add(e);
+
+}
+
+  
+
+  
+dp.init();
+
+</script>
+</div>
+</body>
+</html>

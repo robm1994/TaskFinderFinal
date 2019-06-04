@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css"
+rel="stylesheet" type="text/css">
+<!--  <link rel="stylesheet"
+href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+<link rel="stylesheet"
+href="https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link
+href="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Sortable-Bootstrap-Tables-Bootstrap-Sortable/Contents/bootstrap-sortable.css"
+rel="stylesheet" type="text/css">
+<title>Search Workers</title>
+</head>
+<body>
+
+
+ 
+	<div layout:fragment="content" class="container mySpace">
+	    	 
+
+    
+   <br>
+   </br>
+		<div class="card">
+			<div class="card ">
+				<table class="table table-hover sortable">
+					<thead>
+						<tr>
+							<th>Name <i class="fas fa-sort"></i></th>
+							<th>Email <i class="fas fa-sort"></i></th>
+							<th>Skilled in <i class="fas fa-sort"></i></th>
+						
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="user:${users}">
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.email}"></td>
+							<!-- <td><a href="${user.email}"></a></td>  -->
+						    <td th:text="${user.skill}"></td>
+						    
+						    <td><a  th:href="@{/workerProfile(email=${user.email})}" class="btn btn-dark" >View Profile</a> </td>
+							
+						</tr>
+					</tbody>
+
+				</table>
+				
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+				<script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Sortable-Bootstrap-Tables-Bootstrap-Sortable/Scripts/bootstrap-sortable.js"></script>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

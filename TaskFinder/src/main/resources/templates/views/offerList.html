@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<title>Index Page</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+
+	<div layout:fragment="content" class="container mySpace">
+		
+
+		<div class="card">
+			<div class="card card-body">
+				<h2>
+					Here are the offers you have made, <span th:utext="${name}">
+				</h2>
+			</div>
+			</div>
+			</br>
+		
+		
+		
+		
+		<div class="card">
+			<div class="card card-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Task Description</th>
+							<th>Amount Offered</th>
+							<th>Status</th>
+							<!-- <th>Made By:</th> -->
+							
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="offer:${offers}">
+							<td th:text= "${offer.task.date}"></td>
+							<td th:text= "${offer.task.description}"></td>
+							<td th:text="${offer.amount}"></td>
+							<div th:switch="${offer.accepted}">
+								<td th:case="0"><span class="badge badge-danger">Not Accepted <i class="fa fa-circle-thin" aria-hidden="true"></i></span>
+								</td>
+								<td th:case="1"><span class="badge badge-success">Accepted <i class="fa fa-check-circle" aria-hidden="true"></i></span>
+								<td>
+							
+						
+			
+							
+							
+							
+							
+							<!--  <td><a  th:href="@{/addTask(email=${user.email})}" class="btn btn-dark">Accept</a></td>-->
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

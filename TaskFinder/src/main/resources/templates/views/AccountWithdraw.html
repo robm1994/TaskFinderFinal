@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragments/main_layout}" >
+<head>
+ <title>Payment Page</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container mySpace">
+
+<div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 20rem; margin-top: 6rem;">
+  <div class="card-header">Account Info</div>
+  <div class="card-body"> 
+
+
+<h2>
+Your current Balance is : <span th:utext= "${balance}">  
+</h2>
+<form th:action="@{/withdraw}" method="POST">
+<div class="form-group">
+<label for="amount" class="form-control-label" style="color: white;">Withdrawal amount</label>
+<input type="number" class="form-control" name="amount" id="amount" />
+</div>
+<script src="https://checkout.stripe.com/checkout.js"
+class="stripe-button"
+data-key="pk_test_Y3E9QLoJHROuFYcZBjxVUOXM00ENMLpqyZ"
+data-amount=data-name="TaskFinder"
+data-description="Make your withdrawal!"
+data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+data-locale="auto" data-currency="eur">
+</script>
+</form>
+</div>
+ </div>
+ </div>
+ </div>
+  
+</body>
+</html>

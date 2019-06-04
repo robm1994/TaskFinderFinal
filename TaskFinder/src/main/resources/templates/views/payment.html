@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragments/main_layout}" >
+<head>
+ <title>Payment Page</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container mySpace">
+
+<form th:action="@{/payment}" method="POST">
+<div class="form-group">
+<label for="amount" class="form-control-label" style="color: white;">Payment amount</label>
+<input type="number" class="form-control" name="amount" id="amount" />
+</div>
+<script src="https://checkout.stripe.com/checkout.js"
+class="stripe-button"
+data-key="pk_test_Y3E9QLoJHROuFYcZBjxVUOXM00ENMLpqyZ"
+data-amount=data-name="TaskFinder"
+data-description="Make your payment!"
+data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+data-locale="auto" data-currency="eur">
+</script>
+</form>
+<br>
+<div class="card">
+			<div class="card card-body">
+				<h2>
+				<a  th:href ="@{/}"> Pay Later </a>
+				</h2>
+			</div>
+</div>
+
+
+		
+			
+  
+  
+</body>
+</html>
